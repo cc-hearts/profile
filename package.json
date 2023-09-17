@@ -1,0 +1,31 @@
+{
+  "name": "slice-repo",
+  "private": true,
+  "version": "0.0.1",
+  "main": "",
+  "module": "",
+  "description": "",
+  "typings": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://"
+  },
+  "files": [],
+  "keywords": [],
+  "author": "cc heart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/"
+  },
+  "homepage": "",
+  "scripts": {
+
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  }
+
+}
