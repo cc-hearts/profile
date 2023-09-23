@@ -1,0 +1,11 @@
+{
+  "Print to console": {
+    "scope": "javascript,typescript,vue,javascriptreact,typescriptreact",
+      "prefix": "csl",
+        "body": [
+          "console.log($1);"
+        ],
+          "description": "Log output to console"
+  }
+
+}

@@ -1,0 +1,14 @@
+{
+  "vue 3 snippet": {
+    "scope": "vue",
+    "prefix": "vue",
+    "body": [
+      "<script setup lang='ts'> \n",
+      "</script>",
+      "<template> \n",
+      "</template>",
+      "<style lang='scss'> \n",
+      "</style>"
+    ]
+  }
+}

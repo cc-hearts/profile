@@ -1,0 +1,9 @@
+{
+  "name": "Attach to Chrome",
+  // 指定浏览器提供调试的端口号
+  // 需要与 --remote-debugging-port 端口对应
+  "port": 9222,
+  "request": "attach",
+  "type": "chrome",
+  "webRoot": "${workspaceFolder}"
+}
