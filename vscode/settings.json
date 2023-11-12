@@ -29,7 +29,7 @@
   "window.autoDetectColorScheme": true,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "editor.fontFamily": "Fira Code",
-  "editor.fontWeight": "600",
+  "editor.fontWeight": "500",
   "editor.fontLigatures": false,
   // 保存时使用VSCode 自身格式化程序格式化
   "editor.formatOnSave": true,
