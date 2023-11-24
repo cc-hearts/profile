@@ -1,3 +1,4 @@
+// @ts-ignore
 import fetch, {type RequestInit } from 'node-fetch'
 
 export function request(url: string, options: RequestInit = {}) {
