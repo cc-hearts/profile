@@ -1,74 +1,33 @@
 {
-  // 保存之后是否格式化
-  "explorer.compactFolders": false,
-  // tab缩进
-  "editor.tabSize": 2,
-  // 是否在解决合并冲突后自动转到下一个合并冲突
-  "merge-conflict.autoNavigateNextConflict.enabled": true,
-  // 延迟自动保存
-  "files.autoSave": "afterDelay",
-  // 等待5秒自动保存
-  "files.autoSaveDelay": 5000,
-  // 彩虹括号对
-  "editor.bracketPairColorization.enabled": true,
-  // 单词换行
-  "editor.wordWrapColumn": 150,
-  // 编辑器行高
-  "editor.lineHeight": 25,
-  // 保存文件时候删除行尾的空格
-  "files.trimTrailingWhitespace": true,
-  // 删除文件是否确认
-  "explorer.confirmDelete": false,
-  // 控制在资源管理器内拖放移动文件或文件夹时是否进行确认
-  "explorer.confirmDragAndDrop": false,
-  // 字体设置
-  "window.commandCenter": true,
-  "window.autoDetectColorScheme": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "extensions.ignoreRecommendations": true,
+  "debug.onTaskErrors": "debugAnyway",
+  "editor.tabSize": 2, // tab缩进
+  "editor.accessibilitySupport": "on",
   "editor.fontLigatures": false,
-  // 保存时使用VSCode 自身格式化程序格式化
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": false,
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
-  },
-  // 禁用 默认的 js/ts 格式化 使用eslint格式化
-  "javascript.format.enable": false,
-  "typescript.format.enable": false,
-  // 使用eslint 格式化 js/ts
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  // jsonc是有注释的json
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "eslint.format.enable": true,
-  "eslint.codeActionsOnSave.mode": "problems",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue"
-  ],
+  "editor.minimap.enabled": false,
+  "editor.bracketPairColorization.enabled": true, // 彩虹括号对
+  "editor.wordWrapColumn": 150, // 单词换行
+  "window.commandCenter": true,
+  "window.nativeTabs": true,
+  "window.autoDetectColorScheme": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "always",
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "always",
   "diffEditor.ignoreTrimWhitespace": false,
-  "stylelint.validate": [
-    "css",
-    "less",
-    "postcss",
-    "scss",
-    "vue",
-    "sass",
-    "stylus"
-  ]
+  "merge-conflict.autoNavigateNextConflict.enabled": true, // 是否在解决合并冲突后自动转到下一个合并冲突
+  "files.autoSave": "afterDelay", // 延迟自动保存
+  "files.autoSaveDelay": 5000, // 等待5秒自动保存
+  "files.trimTrailingWhitespace": true, // 保存文件时候删除行尾的空格
+  "explorer.confirmDelete": false, // 删除文件是否确认
+  "explorer.compactFolders": false, // 保存之后是否格式化
+  "explorer.confirmDragAndDrop": false, // 控制在资源管理器内拖放移动文件或文件夹时是否进行确认
+  "workbench.sideBar.location": "right",
+  "workbench.preferredHighContrastLightColorTheme": "Vitesse Light Soft",
+  "workbench.preferredHighContrastColorTheme": "Vitesse Light Soft",
+  "workbench.preferredLightColorTheme": "Vitesse Light Soft",
+  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft",
+  "workbench.colorTheme": "Vitesse Dark Soft",
+  "workbench.iconTheme": "material-icon-theme",
+  "liveServer.settings.donotShowInfoMsg": true
 }
