@@ -1,44 +1,48 @@
 return {
-    'neovim/nvim-lspconfig',
-    config = function()
-        local lspconfig = require 'lspconfig'
+  'neovim/nvim-lspconfig',
+  config = function()
+    local lspconfig = require 'lspconfig'
 
-        -- for fold
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true,
-        }
-        -- vue
-        lspconfig.volar.setup({
-            init_options = {
-                vue = {
-                    hybridMode = false
-                }
-            },
-        })
+    -- for fold
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    }
 
-        -- graphql
-        lspconfig.graphql.setup {
-            filetypes = {'graphql', 'gql'},
-            capabilities = capabilities
-        }
+    -- vue
+    lspconfig.volar.setup({
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
+      },
+    })
 
-        -- lua
-        lspconfig.lua_ls.setup {
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        globals = {'vim'}
-                    }
-                }
-            },
-            capabilities = capabilities
-        }
+    -- graphql
+    lspconfig.graphql.setup {
+      filetypes = {
+        'graphql',
+        'gql',
+      },
+      capabilities = capabilities,
+    }
 
-        -- prisma
-        lspconfig.prismals.setup {
-            capabilities = capabilities
-        }
-    end
+    -- lua
+    lspconfig.lua_ls.setup {
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' },
+          },
+        },
+      },
+      capabilities = capabilities,
+    }
+
+    -- prisma
+    lspconfig.prismals.setup {
+      capabilities = capabilities,
+    }
+  end,
 }
