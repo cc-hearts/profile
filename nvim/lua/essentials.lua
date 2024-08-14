@@ -51,14 +51,32 @@ global.mapleader = " "
 -- key mappings --
 
 vim.keymap.set('i', '<C-v>', '<ESC>l"+Pli') -- Paste insert mode
-vim.keymap.set('i', '<C-z>', '<Esc>:undo<CR>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-z>', '<Esc>:undo<CR>', {
+    noremap = true,
+    silent = true
+})
 
-vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true }) -- save
-vim.keymap.set('v', '<C-v>', '"+P', { noremap = true, silent = true }) -- Paste visual mode
+vim.keymap.set('v', '<C-c>', '"+y', {
+    noremap = true,
+    silent = true
+}) -- save
+vim.keymap.set('v', '<C-v>', '"+P', {
+    noremap = true,
+    silent = true
+}) -- Paste visual mode
 
-vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true }) -- Save
-vim.keymap.set('n', '<C-v>', '"+P', { noremap = true, silent = true }) -- Paste normal mode
-vim.keymap.set('n', '<C-z>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-s>', ':w<CR>', {
+    noremap = true,
+    silent = true
+}) -- Save
+vim.keymap.set('n', '<C-v>', '"+P', {
+    noremap = true,
+    silent = true
+}) -- Paste normal mode
+vim.keymap.set('n', '<C-z>', '<Nop>', {
+    noremap = true,
+    silent = true
+})
 
 function close_non_current_buffers()
     local current_buf = vim.api.nvim_get_current_buf()
@@ -67,16 +85,33 @@ function close_non_current_buffers()
     for _, buf in ipairs(buffers) do
         if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) then
             -- 关闭所有非当前 buffer
-            vim.api.nvim_buf_delete(buf, { force = true })
+            vim.api.nvim_buf_delete(buf, {
+                force = true
+            })
         end
     end
 end
-vim.api.nvim_set_keymap('n', '<leader>qa', ':lua close_non_current_buffers()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>qa', ':lua close_non_current_buffers()<CR>', {
+    noremap = true,
+    silent = true
+})
 
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', {
+    noremap = true,
+    silent = true
+})
+vim.keymap.set('n', '<C-j>', '<C-w>j', {
+    noremap = true,
+    silent = true
+})
+vim.keymap.set('n', '<C-k>', '<C-w>k', {
+    noremap = true,
+    silent = true
+})
+vim.keymap.set('n', '<C-l>', '<C-w>l', {
+    noremap = true,
+    silent = true
+})
 
 vim.keymap.set("n", "<leader>mn", "<cmd>bnext<CR>", {
     silent = true
@@ -87,3 +122,13 @@ vim.keymap.set("n", "<leader>mm", "<cmd>bprevious<CR>", {
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<CR>")
 vim.keymap.set("n", "<leader>bm", "<cmd>bp<CR>")
 vim.keymap.set("n", "<leader>bc", "<cmd>bd<CR>")
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm<CR>', {
+    noremap = true,
+    silent = true
+})
+
+
+vim.keymap.set('t', '<C-\\>', '<C-\\><C-n>', {
+    noremap = true,
+    silent = true
+})

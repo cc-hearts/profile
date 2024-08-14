@@ -8,5 +8,12 @@ return {
       {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>",  mode = {'i'}},
       {"<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = {"i"}},
     },
-  }
+  },
+  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+        -- add any options here
+    }
+}
 }
