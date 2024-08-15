@@ -19,6 +19,13 @@ return {
       },
     })
 
+    -- rust
+    lspconfig.rust_analyzer.setup {
+      settings = {
+        ['rust-analyzer'] = {},
+      },
+    }
+
     -- graphql
     lspconfig.graphql.setup {
       filetypes = {

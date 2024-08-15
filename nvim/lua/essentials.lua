@@ -29,12 +29,13 @@ option.cursorline = true
 
 option.autoread = true
 option.title = true
+vim.opt.titlestring = [[%{fnamemodify(getcwd(), ':t')}]]
 option.signcolumn = "yes"
 
 option.swapfile = false
 option.backup = false
 option.updatetime = 50
-option.mouse = "a"
+option.mouse = ""
 option.undofile = true
 option.undodir = vim.fn.expand('$HOME/.local/share/nvim/undo')
 option.exrc = true
@@ -95,6 +96,18 @@ vim.api.nvim_set_keymap('n', '<leader>qa', ':lua close_non_current_buffers()<CR>
     noremap = true,
     silent = true
 })
+
+local function close_and_switch_to_previous_buffer()
+    -- 获取当前 buffer 的编号
+    local current_bufnr = vim.fn.bufnr()
+
+    -- 执行关闭 buffer 的操作，并自动切换到前一个 buffer
+    vim.cmd('bprevious')
+    vim.cmd('bd ' .. current_bufnr)
+  end
+
+  -- 设置 <leader>q 快捷键
+  vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_and_switch_to_previous_buffer()<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-h>', '<C-w>h', {
     noremap = true,
