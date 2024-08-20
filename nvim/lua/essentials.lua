@@ -97,17 +97,6 @@ vim.api.nvim_set_keymap('n', '<leader>qa', ':lua close_non_current_buffers()<CR>
     silent = true
 })
 
-local function close_and_switch_to_previous_buffer()
-    -- 获取当前 buffer 的编号
-    local current_bufnr = vim.fn.bufnr()
-
-    -- 执行关闭 buffer 的操作，并自动切换到前一个 buffer
-    vim.cmd('bprevious')
-    vim.cmd('bd ' .. current_bufnr)
-  end
-
-  -- 设置 <leader>q 快捷键
-  vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_and_switch_to_previous_buffer()<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-h>', '<C-w>h', {
     noremap = true,
@@ -145,3 +134,6 @@ vim.keymap.set('t', '<C-\\>', '<C-\\><C-n>', {
     noremap = true,
     silent = true
 })
+
+
+vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })

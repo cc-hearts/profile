@@ -10,7 +10,7 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "colorbuddy.nvim": { "branch": "master", "commit": "8b968581e5c19d22a861d5f3fe5dbd83394fa681" },
-  "conform.nvim": { "branch": "master", "commit": "667102f26106709cddd2dff1f699610df5b94d7f" },
+  "conform.nvim": { "branch": "master", "commit": "42b53fcb83fd8d597e1a1dc08f6db72de58f4f46" },
   "edgy.nvim": { "branch": "main", "commit": "ebb77fde6f5cb2745431c6c0fe57024f66471728" },
   "gitsigns.nvim": { "branch": "main", "commit": "562dc47189ad3c8696dbf460d38603a74d544849" },
   "indent-blankline.nvim": { "branch": "master", "commit": "dddb5d21811c319eb6e51a993d8fb44b193aae3f" },
@@ -30,5 +30,5 @@
   "trouble.nvim": { "branch": "main", "commit": "6efc446226679fda0547c0fd6a7892fd5f5b15d8" },
   "typescript-tools.nvim": { "branch": "master", "commit": "f8c2e0b36b651c85f52ad5c5373ff8b07adc15a7" },
   "vim-illuminate": { "branch": "master", "commit": "5eeb7951fc630682c322e88a9bbdae5c224ff0aa" },
-  "vitesse.nvim": { "branch": "main", "commit": "ca27c5026d7014c7a5ab63ab754b4693eb3d2e25" }
+  "vitesse.nvim": { "branch": "main", "commit": "1e00ee10a7ac23426684f43be80eb3edf92c082c" }
 }

@@ -24,15 +24,15 @@ return {
         }
 
         -- local autocmd = vim.api.nvim_create_autocmd
-        -- autocmd('BufWritePre', {
-        --     pattern = '*.ts,*.tsx,*.jsx,*.js',
-        --     callback = function(args)
-        --         vim.cmd 'TSToolsAddMissingImports sync'
-        --         -- vim.cmd 'TSToolsOrganizeImports sync' 不需要格式化导入的语句
-        --         require('conform').format {
-        --             bufnr = args.buf
-        --         }
-        --     end
-        -- })
+        autocmd('BufWritePre', {
+            pattern = '*.ts,*.tsx,*.jsx,*.js',
+            callback = function(args)
+                vim.cmd 'TSToolsAddMissingImports sync'
+                vim.cmd 'TSToolsOrganizeImports sync'
+                require('conform').format {
+                    bufnr = args.buf
+                }
+            end
+        })
     end
 }
