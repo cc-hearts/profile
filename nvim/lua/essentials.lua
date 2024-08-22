@@ -79,20 +79,31 @@ vim.keymap.set('n', '<C-z>', '<Nop>', {
     silent = true
 })
 
-function close_non_current_buffers()
+function ConditionalCloseAllBuffers()
     local current_buf = vim.api.nvim_get_current_buf()
-    -- 获取所有 buffer 的列表
-    local buffers = vim.api.nvim_list_bufs()
-    for _, buf in ipairs(buffers) do
-        if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) then
-            -- 关闭所有非当前 buffer
-            vim.api.nvim_buf_delete(buf, {
-                force = true
-            })
+    local buf_ft = vim.api.nvim_buf_get_option(current_buf, 'filetype')
+
+    -- 如果当前 buffer 是 nvim-tree 或者 zsh;#toggleterm，则不执行任何操作
+    if buf_ft == 'NvimTree' or buf_ft == 'toggleterm' then
+        print('Current buffer is either NvimTree or toggleterm, <leader>qa is disabled.')
+        return
+    end
+
+    local bufs = vim.api.nvim_list_bufs()
+
+    for _, buf in ipairs(bufs) do
+        if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf) then
+            local current_buf = vim.api.nvim_get_current_buf()
+            local buf_ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+            -- 保留 nvim-tree 和 zsh;#toggleterm buffer
+            if buf ~= current_buf and buf_ft ~= 'NvimTree' and buf_ft ~= 'toggleterm' then
+                vim.api.nvim_buf_delete(buf, {force = true})
+            end
         end
     end
 end
-vim.api.nvim_set_keymap('n', '<leader>qa', ':lua close_non_current_buffers()<CR>', {
+
+vim.api.nvim_set_keymap('n', '<leader>qa', ':lua ConditionalCloseAllBuffers()<CR>', {
     noremap = true,
     silent = true
 })
