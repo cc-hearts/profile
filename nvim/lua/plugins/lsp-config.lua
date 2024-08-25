@@ -10,6 +10,8 @@ return {
       lineFoldingOnly = true,
     }
 
+    lspconfig.tsserver.setup{}
+
     -- vue
     lspconfig.volar.setup({
       init_options = {
