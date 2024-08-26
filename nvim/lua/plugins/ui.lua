@@ -1,10 +1,4 @@
-return {{
-    "akinsho/bufferline.nvim",
-    dependencies = {"nvim-tree/nvim-web-devicons"},
-    config = function()
-        require("bufferline").setup({})
-    end
-}, {
+return { {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function()
