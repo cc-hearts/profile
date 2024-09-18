@@ -3,7 +3,7 @@ return {{
     main = "nvim-treesitter.configs",
     build = ":TSUpdate",
     opts = {
-        ensure_installed = "all",
+        auto_install = true,
         highlight = {
             enable = true
         },
