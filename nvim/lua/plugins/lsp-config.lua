@@ -10,7 +10,9 @@ return {
       lineFoldingOnly = true,
     }
 
-    lspconfig.tsserver.setup{}
+    lspconfig.ts_ls.setup {
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    }
 
     -- vue
     lspconfig.volar.setup({
