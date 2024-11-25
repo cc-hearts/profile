@@ -76,6 +76,26 @@ return {
           end
         end)
       end,
+
+      volar = function(_, opts)
+        -- 获取当前缓冲区的 LSP 客户端列表
+        local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+        -- 检查是否有 ESLint 或 Prettier 客户端
+        local has_eslint_or_prettier = false
+        for _, client in ipairs(clients) do
+          if client.name == "eslint" or client.name == "prettier" then
+            has_eslint_or_prettier = true
+            break
+          end
+        end
+
+        -- 如果存在 ESLint 或 Prettier，则禁用 Volar 的格式化功能
+        if has_eslint_or_prettier then
+          opts.format = opts.format or {}
+          opts.format.enable = false
+        end
+      end
     },
   },
 }
