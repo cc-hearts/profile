@@ -1,33 +1,46 @@
 {
-  "security.workspace.trust.untrustedFiles": "open",
-  "extensions.ignoreRecommendations": true,
-  "debug.onTaskErrors": "debugAnyway",
   "editor.tabSize": 2, // tab缩进
-  "editor.accessibilitySupport": "on",
+  "editor.accessibilitySupport": "off",
+  "editor.fontFamily": "MonaspaceNeon-Regular",
   "editor.fontLigatures": false,
   "editor.minimap.enabled": false,
   "editor.bracketPairColorization.enabled": true, // 彩虹括号对
   "editor.wordWrapColumn": 150, // 单词换行
-  "window.commandCenter": true,
-  "window.nativeTabs": true,
-  "window.autoDetectColorScheme": true,
-  "terminal.integrated.enableMultiLinePasteWarning": "always",
-  "git.confirmSync": false,
-  "git.openRepositoryInParentFolders": "always",
-  "diffEditor.ignoreTrimWhitespace": false,
-  "merge-conflict.autoNavigateNextConflict.enabled": true, // 是否在解决合并冲突后自动转到下一个合并冲突
+  "editor.renderWhitespace": "all",
+  "editor.inlineSuggest.showToolbar": "always",
+  "editor.guides.bracketPairs": true,
   "files.autoSave": "afterDelay", // 延迟自动保存
   "files.autoSaveDelay": 5000, // 等待5秒自动保存
   "files.trimTrailingWhitespace": true, // 保存文件时候删除行尾的空格
+  "window.commandCenter": true,
+  "window.nativeTabs": true,
+  "window.autoDetectColorScheme": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
+  "git.enableSmartCommit": true,
   "explorer.confirmDelete": false, // 删除文件是否确认
   "explorer.compactFolders": false, // 保存之后是否格式化
   "explorer.confirmDragAndDrop": false, // 控制在资源管理器内拖放移动文件或文件夹时是否进行确认
-  "workbench.sideBar.location": "right",
-  "workbench.preferredHighContrastLightColorTheme": "Vitesse Light Soft",
-  "workbench.preferredHighContrastColorTheme": "Vitesse Light Soft",
-  "workbench.preferredLightColorTheme": "Vitesse Light Soft",
-  "workbench.preferredDarkColorTheme": "Vitesse Dark Soft",
-  "workbench.colorTheme": "Vitesse Dark Soft",
-  "workbench.iconTheme": "material-icon-theme",
-  "liveServer.settings.donotShowInfoMsg": true
+  "workbench.activityBar.location": "top",
+   "workbench.preferredDarkColorTheme": "Rosé Pine Moon (no italics)",
+   "workbench.preferredLightColorTheme": "Rosé Pine Dawn (no italics)",
+   "workbench.iconTheme": "rose-pine-icons",
+  "merge-conflict.autoNavigateNextConflict.enabled": true, // 是否在解决合并冲突后自动转到下一个合并冲突
+  "security.workspace.trust.untrustedFiles": "open",
+  "debug.onTaskErrors": "debugAnyway",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "extensions.ignoreRecommendations": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "terminal.integrated.fontWeight": "normal",
+  "editor.lineHeight": 2,
+  "terminal.integrated.fontFamily": "monospace",
+  "git.autofetch": true,
+  "security.allowedUNCHosts": [
+    "wsl.localhost"
+  ],
 }
