@@ -1,18 +1,10 @@
-[
-  "antfu.theme-vitesse",
-  "formulahendry.auto-rename-tag",
-  "k--kato.intellij-idea-keybindings",
-  "mhutchie.git-graph",
-  "pkief.material-icon-theme",
-  "ritwickdey.liveserver",
-  "rust-lang.rust-analyzer",
-  "streetsidesoftware.code-spell-checker",
-  "tamasfe.even-better-toml",
-  "usernamehw.errorlens",
-  "vadimcn.vscode-lldb",
-  "vue.volar",
-  "vue.vscode-typescript-vue-plugin",
-  "w88975.code-translate",
-  "tabnine.tabnine-vscode",
-  "albert.tabout"
-]
+{
+  "extensions": [
+    "mhutchie.git-graph",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "albert.tabout",
+    "rust-lang.rust-analyzer",
+    "antfu.unocss"
+  ]
+}
