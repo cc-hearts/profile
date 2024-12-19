@@ -6,6 +6,7 @@ return {
         "stylua",
         "shellcheck",
         "shfmt",
+        "gitui",
         "flake8",
       },
     },
