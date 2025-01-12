@@ -5,6 +5,7 @@ return {
     name = "catppuccin",
     opts = {
       transparent_background = true,
+      no_italic = true,
       integrations = {
         cmp = true,
         treesitter = true,
