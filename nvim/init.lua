@@ -12,7 +12,6 @@ local function open_terminal_at_root(is_vertical)
 end
 
 vim.schedule(function()
-  vim.cmd("Neotree")
   open_terminal_at_root()
 
   vim.cmd("resize 15")
@@ -20,4 +19,6 @@ vim.schedule(function()
 
   vim.cmd("wincmd w") -- 切换到另一个窗口
   vim.cmd("wincmd l") -- 然后调整窗口
+
+  vim.cmd("Neotree")
 end)
