@@ -11,7 +11,18 @@ local function open_terminal_at_root(is_vertical)
   Snacks.terminal.open(nil, { win = { position = position, width = 30 } })
 end
 
+local function is_windows()
+  return package.config:sub(1, 1) == "\\"
+end
+
 vim.schedule(function()
+  if is_windows() then
+    vim.o.shell = "powershell.exe"
+    vim.o.shellcmdflag = "-NoLogo"
+    vim.o.shellquote = ""
+    vim.o.shellxquote = ""
+  end
+
   open_terminal_at_root()
 
   vim.cmd("resize 15")
