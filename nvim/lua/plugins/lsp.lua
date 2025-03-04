@@ -1,6 +1,5 @@
 local function is_project_disabled_formatting()
-  local disable_formatting_projects = {
-  }
+  local disable_formatting_projects = {}
   local cwd = vim.fn.getcwd()
   for _, project_path in ipairs(disable_formatting_projects) do
     if cwd:find(project_path, 1, true) then
@@ -75,8 +74,10 @@ return {
         opts.on_attach = function(client, bufnr)
           -- 检查项目中是否存在 eslint 或 prettier 配置文件
           local function has_eslint_or_prettier_config()
-            local eslint_config_files = { ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.yml", ".eslintrc.yaml", "eslint.config.js" }
-            local prettier_config_files = { ".prettierrc", ".prettierrc.json", ".prettierrc.js", ".prettierrc.yml", ".prettierrc.yaml" }
+            local eslint_config_files =
+              { ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.yml", ".eslintrc.yaml", "eslint.config.js" }
+            local prettier_config_files =
+              { ".prettierrc", ".prettierrc.json", ".prettierrc.js", ".prettierrc.yml", ".prettierrc.yaml" }
 
             -- 遍历 eslint 配置文件
             for _, file in ipairs(eslint_config_files) do
@@ -144,6 +145,18 @@ return {
           opts.format = opts.format or {}
           opts.format.enable = false
         end
+
+        opts.settings = opts.settings or {}
+        opts.settings.css = {
+          lint = {
+            unknownAtRules = "ignore",
+          },
+        }
+        opts.settings.scss = {
+          lint = {
+            unknownAtRules = "ignore",
+          },
+        }
       end,
     },
   },
