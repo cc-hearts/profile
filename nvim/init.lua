@@ -8,7 +8,7 @@ local function open_terminal_at_root(is_vertical)
   else
     position = "bottom"
   end
-  Snacks.terminal.open(nil, { win = { position = position, width = 30 } })
+  Snacks.terminal.open(nil, { win = { position = position, width = 60 } })
 end
 
 local function is_windows()
@@ -26,13 +26,13 @@ vim.schedule(function()
     vim.o.shellxquote = ""
   end
 
-  open_terminal_at_root()
+  open_terminal_at_root(true)
 
   vim.cmd("resize 10")
   vim.cmd("stopinsert")
 
-  vim.cmd("wincmd w") -- 切换到另一个窗口
-  vim.cmd("wincmd l") -- 然后调整窗口
+  -- vim.cmd("wincmd w") -- 切换到另一个窗口
+  -- vim.cmd("wincmd l") -- 然后调整窗口
 
   vim.cmd("Neotree")
 end)
