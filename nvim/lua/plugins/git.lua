@@ -1,12 +1,6 @@
 return {
   -- 其他插件...
-  {
-    "sindrets/diffview.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("diffview").setup({})
-    end,
-  },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "f-person/git-blame.nvim",
     -- load the plugin at startup
@@ -25,4 +19,3 @@ return {
     },
   },
 }
-
