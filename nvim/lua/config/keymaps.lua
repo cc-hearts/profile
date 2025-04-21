@@ -15,10 +15,6 @@ keymap.set("n", "<C-a>", "<Cmd>lua MiniAnimate.execute_after('scroll', 'normal! 
 keymap.set({ "n", "v" }, "gh", "^")
 keymap.set({ "v", "n" }, "gl", "$")
 
-keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Open DiffView" })
-keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = "Close DiffView" })
-keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory<CR>", { desc = "File History" })
-
 -- Buffer 左右移动快捷键
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" }) -- 左移动
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" })         -- 右移动
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" }) -- 右移动

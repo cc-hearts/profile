@@ -1,13 +1,13 @@
-local function is_project_disabled_formatting()
-  local disable_formatting_projects = {}
-  local cwd = vim.fn.getcwd()
-  for _, project_path in ipairs(disable_formatting_projects) do
-    if cwd:find(project_path, 1, true) then
-      return true
-    end
-  end
-  return false
-end
+-- local function is_project_disabled_formatting()
+--   local disable_formatting_projects = {}
+--   local cwd = vim.fn.getcwd()
+--   for _, project_path in ipairs(disable_formatting_projects) do
+--     if cwd:find(project_path, 1, true) then
+--       return true
+--     end
+--   end
+--   return false
+-- end
 
 return {
   "neovim/nvim-lspconfig",
@@ -96,55 +96,55 @@ return {
             return false
           end
 
-          if has_eslint_or_prettier_config() then
-            -- 如果存在 eslint 或 prettier 配置，禁用 tsserver 的格式化功能
-            client.server_capabilities.documentFormattingProvider = false
-          else
-            -- 如果没有 eslint 或 prettier 配置，启用 eslint 的格式化
-            client.server_capabilities.documentFormattingProvider = true
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              command = "EslintFixAll",
-            })
-          end
+          -- if has_eslint_or_prettier_config() then
+          -- 如果存在 eslint 或 prettier 配置，禁用 tsserver 的格式化功能
+          client.server_capabilities.documentFormattingProvider = false
+          -- else
+          --   -- 如果没有 eslint 或 prettier 配置，启用 eslint 的格式化
+          --   client.server_capabilities.documentFormattingProvider = true
+          --   vim.api.nvim_create_autocmd("BufWritePre", {
+          --     buffer = bufnr,
+          --     command = "EslintFixAll",
+          --   })
+          -- end
         end
       end,
 
       eslint = function(_, opts)
         require("lazyvim.util").lsp.on_attach(function(client, bufnr)
-          if is_project_disabled_formatting() then
-            client.server_capabilities.documentFormattingProvider = false
-            return
-          end
+          -- if is_project_disabled_formatting() then
+          client.server_capabilities.documentFormattingProvider = false
+          -- return
+          -- end
 
           -- 仅启用 eslint 格式化
-          if client.name == "eslint" then
-            client.server_capabilities.documentFormattingProvider = true
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              command = "EslintFixAll",
-            })
-          else
-            client.server_capabilities.documentFormattingProvider = false
-          end
+          -- if client.name == "eslint" then
+          --   client.server_capabilities.documentFormattingProvider = true
+          --   vim.api.nvim_create_autocmd("BufWritePre", {
+          --     buffer = bufnr,
+          --     command = "EslintFixAll",
+          --   })
+          -- else
+          --   client.server_capabilities.documentFormattingProvider = false
+          -- end
         end)
       end,
 
       volar = function(_, opts)
-        local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
-        local has_eslint_or_prettier = false
+        -- local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+        -- local has_eslint_or_prettier = false
+        --
+        -- for _, client in ipairs(clients) do
+        --   if client.name == "eslint" or client.name == "prettier" then
+        --     has_eslint_or_prettier = true
+        --     break
+        --   end
+        -- end
 
-        for _, client in ipairs(clients) do
-          if client.name == "eslint" or client.name == "prettier" then
-            has_eslint_or_prettier = true
-            break
-          end
-        end
-
-        if has_eslint_or_prettier or is_project_disabled_formatting() then
-          opts.format = opts.format or {}
-          opts.format.enable = false
-        end
+        -- if has_eslint_or_prettier or is_project_disabled_formatting() then
+        opts.format = opts.format or {}
+        opts.format.enable = false
+        -- end
 
         opts.settings = opts.settings or {}
         opts.settings.css = {
