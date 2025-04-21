@@ -9,9 +9,20 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd("TermOpen", {
---   pattern = "*",
---   callback = function()
---     vim.cmd("resize 10")
---   end,
--- })
+vim.api.nvim_create_autocmd("BufReadPre", {
+  pattern = "*",
+  callback = function(args)
+    local file = args.file
+    local size = vim.fn.getfsize(file)
+    if size > 1024 * 1024 * 2 then -- > 2MB 可自调
+      vim.b.large_file = true
+      vim.cmd("syntax off")
+      vim.cmd("filetype off")
+      vim.opt_local.foldmethod = "manual"
+      vim.opt_local.swapfile = false
+      vim.opt_local.undofile = false
+      vim.opt_local.lazyredraw = true
+      vim.opt_local.eventignore = "all"
+    end
+  end,
+})
