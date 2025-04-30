@@ -31,6 +31,8 @@ vim.schedule(function()
   vim.cmd("stopinsert")
 
   vim.cmd("Neotree")
+  vim.cmd("wincmd l")
+
 end)
 
 -- local function get_system_theme()
