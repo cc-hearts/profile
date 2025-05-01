@@ -130,7 +130,7 @@ return {
         end)
       end,
 
-      volar = function(_, opts)
+      vtsls = function(_, opts)
         -- local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
         -- local has_eslint_or_prettier = false
         --
