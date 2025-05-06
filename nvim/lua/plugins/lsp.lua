@@ -50,14 +50,14 @@ return {
       },
     },
     setup = {
-      eslint = function(_, opts)
-        require("lazyvim.util").lsp.on_attach(function(client, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
-        end)
-      end,
+      -- eslint = function(_, opts)
+      --   require("lazyvim.util").lsp.on_attach(function(client, bufnr)
+      --     vim.api.nvim_create_autocmd("BufWritePre", {
+      --       buffer = bufnr,
+      --       command = "EslintFixAll",
+      --     })
+      --   end)
+      -- end,
 
       vtsls = function(_, opts)
         opts.format = opts.format or {}
