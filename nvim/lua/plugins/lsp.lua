@@ -1,81 +1,57 @@
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "jose-elias-alvarez/typescript.nvim",
-    init = function()
-      require("lazyvim.util").lsp.on_attach(function(_, buffer)
-        vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-        vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-      end)
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "jose-elias-alvarez/typescript.nvim",
+        init = function()
+          require("lazyvim.util").lsp.on_attach(function(_, buffer)
+            vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+            vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { buffer = buffer, desc = "Rename File" })
+          end)
+        end,
+      },
+    },
+    ---@class PluginLspOpts
+    opts = function(_, opts)
+      opts.servers = opts.servers or {}
+
+      -- Pyright
+      opts.servers.pyright = opts.servers.pyright or {}
+
+      -- tsserver 配置
+      opts.servers.tsserver = opts.servers.tsserver or {}
+
+      -- volar 配置
+      opts.servers.volar = {
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
+        },
+      }
+
+      -- vtsls 配置
+      opts.servers.vtsls = opts.servers.vtsls or {}
+      opts.servers.vtsls.filetypes = opts.servers.vtsls.filetypes or {}
+      table.insert(opts.servers.vtsls.filetypes, "vue")
+
+      LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+        {
+          name = "@vue/typescript-plugin",
+          location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+          languages = { "vue" },
+          configNamespace = "typescript",
+          enableForWorkspaceTypeScriptVersions = true,
+        },
+      })
+
+      -- 统一的 setup 配置
+      opts.setup = opts.setup or {}
+      opts.setup.tsserver = function(_, ts_opts)
+        require("typescript").setup({ server = ts_opts })
+        return true
+      end
     end,
-  },
-  opts = {
-    servers = {
-      pyright = {},
-      tsserver = {},
-      cssmodules_ls = {
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-        },
-        root_dir = vim.uv.cwd,
-      },
-      eslint = {
-        settings = {
-          workingDirectories = { mode = "auto" },
-        },
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "vue",
-          "html",
-          "markdown",
-          "json",
-          "jsonc",
-          "yaml",
-          "toml",
-          "xml",
-          "css",
-          "less",
-          "scss",
-        },
-      },
-    },
-    setup = {
-      eslint = function(_, opts)
-        require("lazyvim.util").lsp.on_attach(function(client, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
-        end)
-      end,
-
-      vtsls = function(_, opts)
-        opts.format = opts.format or {}
-        opts.format.enable = false
-        -- end
-
-        opts.settings = opts.settings or {}
-        opts.settings.css = {
-          lint = {
-            unknownAtRules = "ignore",
-          },
-        }
-        opts.settings.scss = {
-          lint = {
-            unknownAtRules = "ignore",
-          },
-        }
-      end,
-    },
-  },
+  }
 }
