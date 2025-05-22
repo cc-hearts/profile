@@ -1,5 +1,28 @@
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    event = "BufReadPost",
+    opts = {
+      suggestion = {
+        enabled = not vim.g.ai_cmp,
+        auto_trigger = true,
+        hide_during_completion = vim.g.ai_cmp,
+        keymap = {
+          accept = true, -- handled by nvim-cmp / blink.cmp
+          next = "<C-j>",
+          prev = "<M-[>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+  },
+  {
     "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
@@ -8,15 +31,17 @@ return {
     opts = {
       -- add any opts here
       -- for example
-      provider = "openai",
-      auto_suggestions_provider = "openai",
-      openai = {
-        endpoint = "https://api.openai.com/v1",
-        model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
-        timeout = 30000, -- timeout in milliseconds
-        temperature = 0, -- adjust if needed
-        max_tokens = 4096,
-        -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
+      provider = "grok",
+      vendors = {
+        grok = {
+          __inherited_from = "openai",
+          api_key_name = "AI_API_KEY",
+             endpoint = "https://api.openai.com/v1",
+          model = "grok-3-mini",
+          timeout = 30000, -- timeout in milliseconds
+          temperature = 0, -- adjust if needed
+          -- max_tokens = 4096,
+        },
       },
     },
   },
