@@ -1,26 +1,13 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "BufReadPost",
-    opts = {
-      suggestion = {
-        enabled = not vim.g.ai_cmp,
-        auto_trigger = true,
-        hide_during_completion = vim.g.ai_cmp,
-        keymap = {
-          accept = true, -- handled by nvim-cmp / blink.cmp
-          next = "<C-j>",
-          prev = "<M-[>",
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
+    "Exafunction/windsurf.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
     },
+    config = function()
+      require("codeium").setup({})
+    end,
   },
   {
     "yetone/avante.nvim",
@@ -36,7 +23,7 @@ return {
         grok = {
           __inherited_from = "openai",
           api_key_name = "AI_API_KEY",
-             endpoint = "https://api.openai.com/v1",
+          endpoint = "https://api.openai.com/v1",
           model = "grok-3-mini",
           timeout = 30000, -- timeout in milliseconds
           temperature = 0, -- adjust if needed
@@ -45,4 +32,5 @@ return {
       },
     },
   },
+
 }
