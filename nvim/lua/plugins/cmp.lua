@@ -12,67 +12,54 @@ return {
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
-      local defaults = require("cmp.config.default")()
-      local auto_select = true
+
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
       return {
-        auto_brackets = {}, -- configure any filetype to auto add brackets
-        completion = {
-          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
-        },
-        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
         mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          -- ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
-          ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
-          ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<C-CR>"] = function(fallback)
-            cmp.abort()
-            fallback()
-          end,
-          ["<tab>"] = function(fallback)
-            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
-          end,
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          -- 替换成无 LuaSnip 的 tab 行为（不建议长期这样）
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- 不使用 <CR>
         }),
         sources = cmp.config.sources({
+          { name = "codeium" }, -- 放在前面优先触发
           { name = "lazydev" },
           { name = "nvim_lsp" },
           { name = "path" },
-          { name = "codeium" },
         }, {
           { name = "buffer" },
         }),
+
         formatting = {
-          format = function(entry, item)
-            local icons = LazyVim.config.icons.kinds
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
-            end
-
-            local widths = {
-              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
-              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
-            }
-
-            for key, width in pairs(widths) do
-              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
-                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
-              end
-            end
-
-            return item
+          format = function(entry, vim_item)
+            vim_item.menu = ({
+              codeium = "[AI]",
+              nvim_lsp = "[LSP]",
+              buffer = "[BUF]",
+              path = "[PATH]",
+            })[entry.source.name]
+            return vim_item
           end,
         },
+
         experimental = {
-          -- only show ghost text when we show ai completions
-          ghost_text = vim.g.ai_cmp and {
-            hl_group = "CmpGhostText",
-          } or false,
+          ghost_text = true, -- 显示 Codeium inline ghost 提示
         },
-        sorting = defaults.sorting,
       }
     end,
     main = "lazyvim.util.cmp",
