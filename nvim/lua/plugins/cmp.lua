@@ -14,7 +14,7 @@ return {
       local cmp = require("cmp")
 
       opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = "emoji" })
+      table.insert(opts.sources, { name = "emoji", name = "codeium" })
 
       opts.mapping = vim.tbl_extend("force", opts.mapping or {}, {
         ["<Tab>"] = cmp.mapping(function(fallback)
