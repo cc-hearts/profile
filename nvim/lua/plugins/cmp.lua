@@ -1,67 +1,48 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    version = false, -- last release is way too old
     enabled = true,
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-    },
-    opts = function()
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+    dependencies = { "hrsh7th/cmp-emoji" },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+
       local cmp = require("cmp")
 
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, { name = "emoji" })
 
-      return {
-        mapping = cmp.mapping.preset.insert({
-          ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          -- 替换成无 LuaSnip 的 tab 行为（不建议长期这样）
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- 不使用 <CR>
-        }),
-        sources = cmp.config.sources({
-          { name = "codeium" }, -- 放在前面优先触发
-          { name = "lazydev" },
-          { name = "nvim_lsp" },
-          { name = "path" },
-        }, {
-          { name = "buffer" },
-        }),
+      opts.mapping = vim.tbl_extend("force", opts.mapping or {}, {
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif vim.snippet.active({ direction = 1 }) then
+            vim.schedule(function()
+              vim.snippet.jump(1)
+            end)
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
 
-        formatting = {
-          format = function(entry, vim_item)
-            vim_item.menu = ({
-              codeium = "[AI]",
-              nvim_lsp = "[LSP]",
-              buffer = "[BUF]",
-              path = "[PATH]",
-            })[entry.source.name]
-            return vim_item
-          end,
-        },
-
-        experimental = {
-          ghost_text = true, -- 显示 Codeium inline ghost 提示
-        },
-      }
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif vim.snippet.active({ direction = -1 }) then
+            vim.schedule(function()
+              vim.snippet.jump(-1)
+            end)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      })
     end,
-    main = "lazyvim.util.cmp",
   },
 }
