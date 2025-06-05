@@ -1,18 +1,7 @@
 return {
   {
-    "Exafunction/windsurf.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({})
-    end,
-  },
-  {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     build = "make",
     opts = {
@@ -32,5 +21,4 @@ return {
       },
     },
   },
-
 }
