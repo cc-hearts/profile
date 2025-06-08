@@ -1,12 +1,33 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = "emoji" })
-    end,
+    "saghen/blink.cmp",
+    event = { "BufNewFile", "BufReadPost" },
+    version = "1.*",
+    opts = {
+      keymap = {
+        ["<C-n>"] = {
+          "show",
+          "select_next",
+        },
+      },
+      completion = {
+        documentation = { auto_show = true },
+        accept = {
+          auto_brackets = {
+            enabled = false,
+          },
+        },
+        menu = {
+          min_width = 24,
+          treesitter = {},
+        },
+      },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+      signature = {
+        enabled = true,
+      },
+    },
   },
 }

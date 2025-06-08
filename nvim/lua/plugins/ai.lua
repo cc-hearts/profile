@@ -7,17 +7,14 @@ return {
     opts = {
       -- add any opts here
       -- for example
-      provider = "grok",
-      vendors = {
-        grok = {
-          __inherited_from = "openai",
-          api_key_name = "AI_API_KEY",
-          endpoint = "https://api.openai.com/v1",
-          model = "grok-3-mini",
-          timeout = 30000, -- timeout in milliseconds
-          temperature = 0, -- adjust if needed
-          -- max_tokens = 4096,
-        },
+      grok = {
+        __inherited_from = "openai",
+        api_key_name = "AI_API_KEY",
+        endpoint = "https://api.openai.com/v1",
+        model = "grok-3-mini",
+        timeout = 30000, -- timeout in milliseconds
+        temperature = 0, -- adjust if needed
+        -- max_tokens = 4096,
       },
     },
   },
