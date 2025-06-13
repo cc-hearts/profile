@@ -19,7 +19,6 @@ return {
         },
         menu = {
           min_width = 24,
-          treesitter = {},
         },
       },
       sources = {
