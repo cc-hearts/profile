@@ -27,3 +27,17 @@ keymap.set("n", "<leader>ft", function()
     end
   end)
 end, { desc = "Terminal (Root Dir + resize 10)" })
+
+keymap.set("n", "<leader>ft", function()
+  Snacks.terminal(nil, { cwd = vim.fn.getcwd() })
+
+  vim.schedule(function()
+    if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal" then
+      vim.cmd("resize 10")
+    end
+  end)
+end, { desc = "Terminal (Root Dir + resize 10)" })
+
+vim.keymap.set("n", "<leader>fe", function()
+  require("neo-tree.command").execute({ toggle = true, dir = vim.fn.getcwd() })
+end)
