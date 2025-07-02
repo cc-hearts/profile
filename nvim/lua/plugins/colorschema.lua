@@ -1,8 +1,15 @@
 return {
+  -- add gruvbox
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    priority = 1000,
     opts = {
+      flavour = "auto", -- latte, frappe, macchiato, mocha
+      background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+      },
       transparent_background = true,
       no_italic = true,
       integrations = {
@@ -16,11 +23,11 @@ return {
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
 
-  -- -- Configure LazyVim to load gruvbox
+  -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
