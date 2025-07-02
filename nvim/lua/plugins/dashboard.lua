@@ -89,9 +89,18 @@ return {
     ---@module 'bufferline'
     ---@type fun(_, opts: bufferline.UserConfig): bufferline.UserConfig
     opts = function(_, opts)
-      opts.options.show_buffer_close_icons = false
-      opts.options.show_close_icon = false
-      opts.options.indicator = { icon = "" }
+      opts.options.indicator = { icon = "|" }
+
+      opts.highlights = {
+        separator = {
+          fg = "#eb6f92",
+        },
+        indicator_selected = { bg = "#eb6f92", fg = "#eb6f92" },
+        buffer_selected = {
+          fg = "#abdbe3",
+          bold = true,
+        },
+      }
 
       return opts
     end,

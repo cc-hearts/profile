@@ -7,15 +7,29 @@ return {
     opts = {
       -- add any opts here
       -- for example
-      grok = {
-        __inherited_from = "openai",
-        api_key_name = "AI_API_KEY",
-        endpoint = "https://api.openai.com/v1",
-        model = "grok-3-mini",
-        timeout = 30000, -- timeout in milliseconds
-        temperature = 0, -- adjust if needed
-        -- max_tokens = 4096,
+      provider = "groq",
+      auto_suggestions_provider = "groq",
+      providers = {
+        groq = {
+          __inherited_from = "openai",
+          api_key_name = "AI_API_KEY",
+          endpoint = "https://www.openai.com/v1",
+          model = "gpt-4o-mini",
+          timeout = 30000, -- timeout in milliseconds
+          -- temperature = 0, -- adjust if needed
+          -- max_tokens = 4096,
+        },
       },
     },
+  },
+  {
+    "Exafunction/windsurf.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "saghen/blink.cmp",
+    },
+    config = function()
+      require("codeium").setup({})
+    end,
   },
 }

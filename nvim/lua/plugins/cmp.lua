@@ -1,6 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
+    dependencies = { "Saghen/blink.compat", "Exafunction/codeium.nvim" },
     event = { "BufNewFile", "BufReadPost" },
     version = "1.*",
     opts = {
@@ -22,7 +23,15 @@ return {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "codeium" },
+        providers = {
+          codeium = { name = "Codeium", module = "codeium.blink", async = true },
+        },
+        compat = {
+          "avante_commands",
+          "avante_mentions",
+          "avante_files",
+        },
       },
       signature = {
         enabled = true,
