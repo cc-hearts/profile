@@ -5,6 +5,13 @@ return {
     event = { "BufNewFile", "BufReadPost" },
     version = "1.*",
     opts = {
+      -- 控制整个 blink 的启用
+      enabled = function()
+        -- 禁用 prompt 类型 buffer 和非普通 buffer
+        return vim.bo.buftype == ""
+          -- 可选：禁用特定 filetype，如 Telescope prompt
+          and not vim.tbl_contains({ "TelescopePrompt", "DressingInput" }, vim.bo.filetype)
+      end,
       keymap = {
         ["<C-n>"] = {
           "show",
