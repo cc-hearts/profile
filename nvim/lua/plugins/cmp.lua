@@ -5,13 +5,6 @@ return {
     event = { "BufNewFile", "BufReadPost" },
     version = "1.*",
     opts = {
-      -- 控制整个 blink 的启用
-      enabled = function()
-        -- 禁用 prompt 类型 buffer 和非普通 buffer
-        return vim.bo.buftype == ""
-          -- 可选：禁用特定 filetype，如 Telescope prompt
-          and not vim.tbl_contains({ "TelescopePrompt", "DressingInput" }, vim.bo.filetype)
-      end,
       keymap = {
         ["<C-n>"] = {
           "show",
@@ -32,7 +25,15 @@ return {
       sources = {
         default = { "lsp", "path", "snippets", "buffer", "codeium" },
         providers = {
-          codeium = { name = "Codeium", module = "codeium.blink", async = true },
+          codeium = {
+            name = "Codeium",
+            module = "codeium.blink",
+            async = true,
+            enabled = function()
+              local filepath = vim.api.nvim_buf_get_name(0)
+              return filepath ~= nil and filepath ~= ""
+            end,
+          },
         },
         compat = {
           "avante_commands",
