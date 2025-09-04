@@ -41,3 +41,4 @@ end, { desc = "Terminal (Root Dir + resize 10)" })
 vim.keymap.set("n", "<leader>fe", function()
   require("neo-tree.command").execute({ toggle = true, dir = vim.fn.getcwd() })
 end)
+
