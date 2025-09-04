@@ -1,7 +1,7 @@
 {
   "editor.tabSize": 2, // tab缩进
   "editor.accessibilitySupport": "off",
-  "editor.fontFamily": "Fira Code",
+  "editor.fontFamily": "Maple Mono NF",
   "editor.fontLigatures": false,
   "editor.minimap.enabled": false,
   "editor.bracketPairColorization.enabled": true, // 彩虹括号对
@@ -29,14 +29,25 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "extensions.ignoreRecommendations": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
-  },
   "terminal.integrated.fontWeight": "normal",
   "editor.lineHeight": 2,
-  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontFamily": "Maple Mono NF",
   "git.autofetch": true,
-  "security.allowedUNCHosts": [
-    "wsl.localhost"
-  ],
+  "git.ignoreRebaseWarning": true,
+  "git.replaceTagsWhenPull": true,
+  "workbench.preferredDarkColorTheme": "Rosé Pine",
+  "workbench.iconTheme": "rose-pine-icons",
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
