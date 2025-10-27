@@ -1,0 +1,38 @@
+"editor.tabSize": 2, // 设置一个 Tab 等于 2 个空格
+  "editor.accessibilitySupport": "off", // 关闭无障碍支持（如屏幕阅读器提示）
+  "editor.fontFamily": "Maple Mono NF", // 设置编辑器字体为 Maple Mono NF（支持 Nerd Font 图标）
+  "editor.fontLigatures": false, // 禁用连字（例如 “=>” 不会显示为特殊符号）
+  "editor.minimap.enabled": false, // 关闭右侧的迷你地图
+  "editor.bracketPairColorization.enabled": true, // 启用彩虹括号，方便区分嵌套层级
+  "editor.wordWrapColumn": 150, // 当一行超过 150 个字符时进行自动换行
+  "editor.renderWhitespace": "all", // 显示所有空白字符（空格、制表符等）
+  "editor.inlineSuggest.showToolbar": "always", // 始终显示内联智能建议的工具栏
+  "editor.guides.bracketPairs": true, // 显示括号配对的辅助线
+  "files.autoSave": "afterDelay", // 自动保存模式：延迟保存
+  "files.autoSaveDelay": 5000, // 延迟 5000 毫秒（5 秒）后自动保存
+  "files.trimTrailingWhitespace": true, // 保存文件时自动删除行尾多余空格
+  "window.nativeTabs": true, // 启用 macOS 原生标签页（每个文件一个标签）
+  "git.confirmSync": false, // 同步 Git 时不再弹出确认框
+  "git.openRepositoryInParentFolders": "always", // 打开项目时自动寻找上级目录的 Git 仓库
+  "git.enableSmartCommit": true, // 允许直接提交（即使没有 staged 文件）
+  "explorer.confirmDelete": false, // 删除文件时不再提示确认
+  "explorer.compactFolders": false, // 禁用资源管理器的“紧凑文件夹”显示
+  "explorer.confirmDragAndDrop": false, // 拖动文件时不弹出确认框
+  "merge-conflict.autoNavigateNextConflict.enabled": true, // 解决一个合并冲突后自动跳转到下一个
+  "security.workspace.trust.untrustedFiles": "open", // 打开不受信任的文件时直接打开，不提示
+  "debug.onTaskErrors": "debugAnyway", // 任务出错时仍然启动调试
+  "terminal.integrated.enableMultiLinePasteWarning": "never", // 粘贴多行命令时不弹出警告
+  "diffEditor.ignoreTrimWhitespace": false, // 在比较文件差异时，不忽略行尾空格
+  "extensions.ignoreRecommendations": true, // 忽略 VSCode 的扩展推荐提示
+  "typescript.updateImportsOnFileMove.enabled": "always", // 移动 TypeScript 文件时自动更新 import 引用
+  "terminal.integrated.fontWeight": "normal", // 终端字体粗细设为正常
+  "editor.lineHeight": 2, // 行高设为 2（单位为字体高度倍数）
+  "terminal.integrated.fontFamily": "Maple Mono NF", // 终端字体设置为 Maple Mono NF
+  "git.autofetch": true, // 自动从远程仓库抓取更新
+  "git.ignoreRebaseWarning": true, // 变基操作时不再显示警告
+  "git.replaceTagsWhenPull": true, // 执行 git pull 时自动替换本地 tag
+  "window.autoDetectColorScheme": true, // 自动检测系统的浅色/深色模式
+  "workbench.preferredDarkColorTheme": "Tokyo Night Storm", // 系统是深色模式时用这个主题
+  "workbench.preferredLightColorTheme": "Tokyo Night Light", // 系统是浅色模式时用这个主题
+  "workbench.iconTheme": "material-icon-theme", // 使用 material-icon-theme 图标主题
+  "AI.toolcall.confirmMode": "autoRun"
