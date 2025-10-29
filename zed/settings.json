@@ -13,5 +13,15 @@
     "mode": "system",
     "light": "Tokyo Night Light",
     "dark": "Tokyo Night Storm"
+  },
+  "format_on_save": "on",
+  "formatter": "prettier",
+  "prettier": {
+    "semi": false,
+    "allowed": true,
+    "tabWidth": 2,
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "singleQuote": true
   }
 }
