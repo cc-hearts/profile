@@ -1,10 +1,14 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = { "Saghen/blink.compat", "Exafunction/codeium.nvim" },
+    dependencies = { "saghen/blink.compat" },
     event = { "BufNewFile", "BufReadPost" },
     version = "1.*",
     opts = {
+      enabled = function()
+        return vim.bo.buftype == ""
+          and not vim.tbl_contains({ "TelescopePrompt", "DressingInput" }, vim.bo.filetype)
+      end,
       keymap = {
         ["<C-n>"] = {
           "show",
@@ -23,18 +27,7 @@ return {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "codeium" },
-        providers = {
-          codeium = {
-            name = "Codeium",
-            module = "codeium.blink",
-            async = true,
-            enabled = function()
-              local filepath = vim.api.nvim_buf_get_name(0)
-              return filepath ~= nil and filepath ~= ""
-            end,
-          },
-        },
+        default = { "lsp", "path", "snippets", "buffer" },
         compat = {
           "avante_commands",
           "avante_mentions",

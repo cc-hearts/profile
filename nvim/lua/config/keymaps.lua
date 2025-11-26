@@ -14,24 +14,14 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set({ "n", "v" }, "gh", "^")
 keymap.set({ "v", "n" }, "gl", "$")
 
--- Buffer 左右移动快捷键
+-- Buffer keymaps
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" }) -- 左移动
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" }) -- 右移动-
 
 keymap.set("n", "<leader>ft", function()
-  Snacks.terminal(nil, { cwd = LazyVim.root() })
 
   vim.schedule(function()
-    if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal" then
-      vim.cmd("resize 10")
-    end
-  end)
-end, { desc = "Terminal (Root Dir + resize 10)" })
-
-keymap.set("n", "<leader>ft", function()
-  Snacks.terminal(nil, { cwd = vim.fn.getcwd() })
-
-  vim.schedule(function()
+    Snacks.terminal(nil, { cwd = vim.fn.getcwd() })
     if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal" then
       vim.cmd("resize 10")
     end
