@@ -26,7 +26,7 @@
   "theme": {
     "mode": "system",
     "light": "Tokyo Night Light",
-    "dark": "Tokyo Night Storm"
+    "dark": "GitHub Dark Default"
   },
   "format_on_save": "on",
   "formatter": "prettier",
@@ -42,8 +42,7 @@
     "JavaScript": {
       "formatter": [
         "prettier",
-        { "code_action": "source.fixAll.eslint" },
-        { "code_action": "source.organizeImports" }
+        { "code_action": "source.fixAll.eslint" }
       ]
     },
 

@@ -12,15 +12,19 @@
       "space g g": "git_panel::ToggleFocus",
       "space f e": "project_panel::ToggleFocus",
       "space f g": "workspace::NewSearch",
-      "space f f": "file_finder::Toggle"
+      "space f f": "file_finder::Toggle",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
   {
     "context": "vim_mode",
     "bindings": {
       "ctrl-s": "workspace::Save",
-      "ctrl-h": "pane::ActivatePreviousItem",
-      "ctrl-l": "pane::ActivateNextItem"
+      "cmd-h": "pane::ActivatePreviousItem",
+      "cmd-l": "pane::ActivateNextItem"
     }
   },
   {
