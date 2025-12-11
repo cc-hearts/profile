@@ -1,13 +1,27 @@
 {
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini"
+    },
+    "model_parameters": []
+  },
+  "use_system_window_tabs": true,
+  "when_closing_with_no_tabs": "keep_window_open",
+  "vim_mode": true,
+  "terminal": {
+    "font_size": 12.0
+  },
+  "expand_excerpt_lines": 5,
   "ui_font_family": "Maple Mono NF",
-  "buffer_font_weight": 400.0,
+  "buffer_font_weight": 500.0,
   "buffer_font_family": "Maple Mono NF",
   "icon_theme": {
     "mode": "system",
     "light": "Material Icon Theme",
     "dark": "Material Icon Theme"
   },
-  "ui_font_size": 13.0,
+  "ui_font_size": 12.0,
   "buffer_font_size": 12.0,
   "theme": {
     "mode": "system",
@@ -23,5 +37,24 @@
     "bracketSpacing": true,
     "jsxSingleQuote": true,
     "singleQuote": true
+  },
+  "languages": {
+    "JavaScript": {
+      "formatter": [
+        "prettier",
+        { "code_action": "source.fixAll.eslint" },
+        { "code_action": "source.organizeImports" }
+      ]
+    },
+
+    "TypeScript": {
+      "formatter": [
+        "prettier",
+        { "code_action": "source.fixAll.eslint" },
+        { "code_action": "source.organizeImports" }
+      ]
+    },
+    "TSX": {},
+    "Vue.js": {}
   }
 }

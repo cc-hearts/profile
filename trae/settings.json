@@ -1,4 +1,5 @@
-"editor.tabSize": 2, // 设置一个 Tab 等于 2 个空格
+{
+  "editor.tabSize": 2, // 设置一个 Tab 等于 2 个空格
   "editor.accessibilitySupport": "off", // 关闭无障碍支持（如屏幕阅读器提示）
   "editor.fontFamily": "Maple Mono NF", // 设置编辑器字体为 Maple Mono NF（支持 Nerd Font 图标）
   "editor.fontLigatures": false, // 禁用连字（例如 “=>” 不会显示为特殊符号）
@@ -36,3 +37,4 @@
   "workbench.preferredLightColorTheme": "Tokyo Night Light", // 系统是浅色模式时用这个主题
   "workbench.iconTheme": "material-icon-theme", // 使用 material-icon-theme 图标主题
   "AI.toolcall.confirmMode": "autoRun"
+}
