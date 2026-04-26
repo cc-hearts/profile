@@ -182,10 +182,17 @@ return {
       vim.list_extend(opts.ensure_installed, {
         "biome",
         "eslint_d",
+        "eslint-lsp",
+        "json-lsp",
         "oxfmt",
         "oxlint",
         "prettier",
         "stylelint",
+        "stylua",
+        "shfmt",
+        "vtsls",
+        "vue-language-server",
+        "yaml-language-server",
       })
     end,
   },

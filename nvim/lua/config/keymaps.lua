@@ -19,7 +19,6 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" }) -- 
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { desc = "Next buffer" }) -- 右移动-
 
 keymap.set("n", "<leader>ft", function()
-
   vim.schedule(function()
     Snacks.terminal(nil, { cwd = vim.fn.getcwd() })
     if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "terminal" then
@@ -32,3 +31,8 @@ vim.keymap.set("n", "<leader>fe", function()
   require("neo-tree.command").execute({ toggle = true, dir = vim.fn.getcwd() })
 end)
 
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+  LazyVim.format({ force = true })
+end, { desc = "Format" })
+
+vim.keymap.set("n", "<leader>cF", "<cmd>LazyFormatInfo<cr>", { desc = "Format Info" })

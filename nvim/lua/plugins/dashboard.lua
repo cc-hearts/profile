@@ -109,6 +109,7 @@ return {
     "folke/noice.nvim",
     lazy = false,
     opts = function(_, opts)
+      opts.routes = opts.routes or {}
       table.insert(opts.routes, {
         filter = {
           event = "notify",
@@ -120,6 +121,13 @@ return {
         filter = {
           event = "notify",
           find = "Copilot is not recommended as the default auto suggestion provider",
+        },
+        opts = { skip = true },
+      })
+      table.insert(opts.routes, {
+        filter = {
+          event = "notify",
+          find = "No code actions available",
         },
         opts = { skip = true },
       })
