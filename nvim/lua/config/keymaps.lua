@@ -1,7 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-
 local keymap = vim.keymap
 
 keymap.set("n", "+", "<C-a>")
@@ -26,10 +25,6 @@ keymap.set("n", "<leader>ft", function()
     end
   end)
 end, { desc = "Terminal (Root Dir + resize 10)" })
-
-vim.keymap.set("n", "<leader>fe", function()
-  require("neo-tree.command").execute({ toggle = true, dir = vim.fn.getcwd() })
-end)
 
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
   LazyVim.format({ force = true })
