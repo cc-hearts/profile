@@ -6,3 +6,10 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- NOTE: vite-plus projects used to disable autoformat here because the only
+-- way to match `vp fmt` was to spawn the ~1.2s oxfmt wrapper on every save.
+-- Formatting is now driven by a persistent oxfmt LSP client
+-- (`lua/util/oxfmt_lsp.lua`, registered in `lua/plugins/formatting.lua`) that
+-- evaluates `vite.config.ts` once and then formats in ~0.3ms, so autoformat is
+-- left enabled. Toggle per-buffer with `<leader>uf` or set `vim.b.autoformat = false`.

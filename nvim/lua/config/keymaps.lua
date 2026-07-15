@@ -31,3 +31,29 @@ vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 end, { desc = "Format" })
 
 vim.keymap.set("n", "<leader>cF", "<cmd>LazyFormatInfo<cr>", { desc = "Format Info" })
+
+vim.g.ai_commit_provider = "xfyun"
+
+vim.api.nvim_create_user_command("AICommit", function()
+  vim.fn.jobstart({ "ai-commit", "--provider", vim.g.ai_commit_provider, "--json" }, {
+    stdout_buffered = true,
+    on_stdout = function(_, data)
+      local output = table.concat(data, "\n")
+      if output == "" then
+        return
+      end
+
+      local ok, result = pcall(vim.json.decode, output)
+      if ok and result.message then
+        vim.fn.setreg("+", result.message)
+        vim.notify("AI commit message copied")
+      end
+    end,
+    on_stderr = function(_, data)
+      local message = table.concat(data, "\n")
+      if message ~= "" then
+        vim.notify(message, vim.log.levels.ERROR)
+      end
+    end,
+  })
+end, {})
