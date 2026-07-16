@@ -32,6 +32,15 @@ end, { desc = "Format" })
 
 vim.keymap.set("n", "<leader>cF", "<cmd>LazyFormatInfo<cr>", { desc = "Format Info" })
 
+-- VSCode-like literal search.
+-- `/` and `?` default to "very nomagic" (\V) so characters like . * [ ] ( )
+-- match literally instead of as regex -- just like VSCode's default search.
+-- Empty search still repeats the last one (verified). To use regex for a search,
+-- prefix the pattern with \v, e.g.  /\vfoo|bar  . `*`/`#` (word search) are
+-- left as-is.
+keymap.set({ "n", "x", "o" }, "/", "/\\V", { desc = "Search (literal)" })
+keymap.set({ "n", "x", "o" }, "?", "?\\V", { desc = "Search backward (literal)" })
+
 vim.g.ai_commit_provider = "xfyun"
 
 vim.api.nvim_create_user_command("AICommit", function()
