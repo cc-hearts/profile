@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>cF", "<cmd>LazyFormatInfo<cr>", { desc = "Format In
 keymap.set({ "n", "x", "o" }, "/", "/\\V", { desc = "Search (literal)" })
 keymap.set({ "n", "x", "o" }, "?", "?\\V", { desc = "Search backward (literal)" })
 
-vim.g.ai_commit_provider = "xfyun"
+vim.g.ai_commit_provider = "nvim"
 
 vim.api.nvim_create_user_command("AICommit", function()
   vim.fn.jobstart({ "ai-commit", "--provider", vim.g.ai_commit_provider, "--json" }, {
