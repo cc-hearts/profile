@@ -38,7 +38,7 @@ local p = {
   constant = "#c99076",
   type     = "#5da994",
   interface= "#5d99a9",
-  class    = "#7f8ac7",
+  class    = "#6872ab",
   property = "#b8a965",
   namespace= "#db889a",
   punct    = "#444444",
@@ -183,7 +183,7 @@ hi("Error", { fg = p.red })
 ------------------------------------------------------------------
 link("@variable", "Identifier")
 hi("@variable.builtin", { fg = p.builtin }) -- self / this
-hi("@variable.parameter", { fg = p.fg })    -- 参数：默认前景
+hi("@variable.parameter", { fg = p.variable }) -- 参数：暖金色，与普通变量区分于正文
 hi("@variable.member", { fg = p.property })
 hi("@constant", { fg = p.constant })
 hi("@constant.builtin", { fg = p.boolean })
@@ -237,6 +237,8 @@ hi("@punctuation.special", { fg = p.punct })
 hi("@type", { fg = p.type })
 hi("@type.builtin", { fg = p.builtin })
 hi("@type.definition", { fg = p.type })
+hi("@type.class", { fg = p.class })
+hi("@type.interface", { fg = p.interface })
 hi("@type.qualifier", { fg = p.red })
 hi("@property", { fg = p.property })
 
@@ -288,12 +290,12 @@ link("@text.quote", "@markup.quote")
 ------------------------------------------------------------------
 -- LSP 语义高亮（链接到 treesitter）
 ------------------------------------------------------------------
-link("@lsp.type.class", "@type")
+link("@lsp.type.class", "@type.class")
 link("@lsp.type.decorator", "@function")
 link("@lsp.type.enum", "@type")
 link("@lsp.type.enumMember", "@constant")
 link("@lsp.type.function", "@function")
-link("@lsp.type.interface", "@type")
+link("@lsp.type.interface", "@type.interface")
 link("@lsp.type.macro", "@function.macro")
 link("@lsp.type.method", "@method")
 link("@lsp.type.namespace", "@module")
