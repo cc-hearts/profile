@@ -1,8 +1,11 @@
--- 自制 vitesse-black 主题（零依赖，本地文件 colors/vitesse-black.lua）
+-- 本地 Vitesse Soft 主题（零依赖），跟随 macOS 的 light/dark 外观。
 -- 不再依赖 2nthony/vitesse.nvim 和 colorbuddy.nvim
+local system_theme = require("util.system_theme")
+
 return {
   {
     "LazyVim",
-    opts = { colorscheme = "vitesse-black" },
+    init = system_theme.start,
+    opts = { colorscheme = system_theme.colorscheme() },
   },
 }

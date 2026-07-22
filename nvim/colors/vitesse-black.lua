@@ -1,62 +1,128 @@
--- vitesse-black 主题（自制版，零依赖）
--- 配色取自 shiki vitesse-black.json，纯黑底 + Vitesse 标志绿
--- 用法：在 lua/plugins/colorscheme.lua 里 { "LazyVim", opts = { colorscheme = "vitesse-black" } }
+-- Vitesse 主题（自制版，零依赖）
+-- 配色取自 Shiki 官方 Vitesse 主题。
+-- 支持 black 和 light-soft 两个变体。
 
--- 是否透明背景（true = 透出终端，需终端背景设为 #000000）
+-- 是否透明背景（true = 透出终端）
 local transparent = false
+local requested_variant = vim.g.vitesse_theme_variant
+local supported_variants = {
+  black = true,
+  ["light-soft"] = true,
+}
+local variant = supported_variants[requested_variant] and requested_variant or "black"
+local is_light = variant == "light-soft"
 
+vim.o.background = is_light and "light" or "dark"
 vim.cmd("hi clear")
 if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
-vim.g.colors_name = "vitesse-black"
+vim.g.colors_name = "vitesse-" .. variant
 vim.o.termguicolors = true
 
 ------------------------------------------------------------------
 -- 调色板
 ------------------------------------------------------------------
-local p = {
-  bg       = "#000000",
-  bg1      = "#121212", -- 选中 / 光标行 / hover
-  bg2      = "#181818", -- 浮动列表 / 调试
-  visual   = "#262626",
-  fg       = "#dbd7ca",
-  fg1      = "#bfbaaa", -- 活动前景（状态栏 / 侧栏）
-  fg2      = "#959da5", -- 次要 / 非活动
-  fg3      = "#6e6e6e", -- 忽略 / 行号
-  border   = "#191919",
-  border1  = "#2f363d", -- 更淡的边框 / 缩进线
+local palettes = {
+  black = {
+    bg = "#000000",
+    bg1 = "#121212", -- 选中 / 光标行 / hover
+    bg2 = "#181818", -- 浮动列表 / 调试
+    visual = "#262626",
+    fg = "#dbd7ca",
+    fg1 = "#bfbaaa", -- 活动前景（状态栏 / 侧栏）
+    fg2 = "#959da5", -- 次要 / 非活动
+    fg3 = "#6e6e6e", -- 忽略 / 行号
+    border = "#191919",
+    border1 = "#2f363d", -- 更淡的边框 / 缩进线
 
-  comment  = "#758575",
-  string   = "#c98a7d",
-  variable = "#bd976a",
-  keyword  = "#4d9375",
-  number   = "#4c9a91",
-  boolean  = "#4d9375",
-  operator = "#cb7676",
-  func     = "#80a665",
-  constant = "#c99076",
-  type     = "#5da994",
-  interface= "#5d99a9",
-  class    = "#6872ab",
-  property = "#b8a965",
-  namespace= "#db889a",
-  punct    = "#444444",
-  decorator= "#bd8f8f",
-  regex    = "#c4704f",
-  tag      = "#4d9375",
-  attribute= "#bd976a",
-  builtin  = "#cb7676",
+    comment = "#758575",
+    string = "#c98a7d",
+    variable = "#bd976a",
+    keyword = "#4d9375",
+    number = "#4c9a91",
+    boolean = "#4d9375",
+    operator = "#cb7676",
+    func = "#80a665",
+    constant = "#c99076",
+    type = "#5da994",
+    interface = "#5d99a9",
+    class = "#6872ab",
+    property = "#b8a965",
+    namespace = "#db889a",
+    punct = "#444444",
+    decorator = "#bd8f8f",
+    regex = "#c4704f",
+    tag = "#4d9375",
+    attribute = "#bd976a",
+    builtin = "#cb7676",
 
-  green    = "#4d9375",
-  cyan     = "#5eaab5",
-  blue     = "#6394bf",
-  red      = "#cb7676",
-  orange   = "#d4976c",
-  yellow   = "#e6cc77",
-  magenta  = "#d9739f",
-  purple   = "#7f8ac7",
+    green = "#4d9375",
+    cyan = "#5eaab5",
+    blue = "#6394bf",
+    red = "#cb7676",
+    orange = "#d4976c",
+    yellow = "#e6cc77",
+    magenta = "#d9739f",
+    purple = "#7f8ac7",
+
+    diff_add = "#16261c",
+    diff_change = "#161e2b",
+    diff_text = "#26324a",
+    diff_delete = "#2a1616",
+    accent_fg = "#000000",
+  },
+  ["light-soft"] = {
+    bg = "#f1f0e9",
+    bg1 = "#e7e5db", -- 行高亮 / 列表 hover
+    bg2 = "#deddd6", -- 选中项 / 引用高亮
+    visual = "#deddd6",
+    fg = "#393a34",
+    fg1 = "#4e4f47",
+    fg2 = "#6a737d",
+    fg3 = "#a0a19d",
+    border = "#e7e5db",
+    border1 = "#d1d5da",
+
+    comment = "#a0ada0",
+    string = "#b56959",
+    variable = "#b07d48",
+    keyword = "#1e754f",
+    number = "#2f798a",
+    boolean = "#1e754f",
+    operator = "#ab5959",
+    func = "#59873a",
+    constant = "#a65e2b",
+    type = "#2e8f82",
+    interface = "#2e808f",
+    class = "#5a6aa6",
+    property = "#998418",
+    namespace = "#b05a78",
+    punct = "#999999",
+    decorator = "#ab5959",
+    regex = "#ab5e3f",
+    tag = "#1e754f",
+    attribute = "#b07d48",
+    builtin = "#ab5959",
+
+    green = "#1e754f",
+    cyan = "#2993a3",
+    blue = "#296aa3",
+    red = "#ab5959",
+    orange = "#a65e2b",
+    yellow = "#bda437",
+    magenta = "#a13865",
+    purple = "#6f42c1",
+
+    diff_add = "#f0fff4",
+    diff_change = "#ffebda",
+    diff_text = "#fff5b1",
+    diff_delete = "#ffeef0",
+    accent_fg = "#ffffff",
+  },
 }
+
+local p = palettes[variant]
 
 local function hi(name, spec)
   vim.api.nvim_set_hl(0, name, spec)
@@ -216,7 +282,7 @@ hi("@keyword", { fg = p.keyword })
 hi("@keyword.function", { fg = p.keyword })
 hi("@keyword.operator", { fg = p.operator }) -- and / or / not / in
 hi("@keyword.import", { fg = p.keyword })
-hi("@keyword.storage", { fg = p.red })       -- const / let / var
+hi("@keyword.storage", { fg = p.red }) -- const / let / var
 hi("@keyword.repeat", { fg = p.keyword })
 hi("@keyword.return", { fg = p.keyword })
 hi("@keyword.debug", { fg = p.red })
@@ -225,11 +291,11 @@ hi("@keyword.conditional", { fg = p.keyword })
 hi("@keyword.conditional.ternary", { fg = p.operator })
 hi("@keyword.type", { fg = p.keyword })
 hi("@keyword.modifier", { fg = p.red })
-hi("@keyword.directive", { fg = p.red })     -- #define / pragma
+hi("@keyword.directive", { fg = p.red }) -- #define / pragma
 hi("@keyword.export", { fg = p.keyword })
 
-hi("@operator", { fg = p.operator })         -- 算术/逻辑运算符
-hi("@assignment", { fg = p.punct })          -- = += 等（vitesse 里赋值是灰色）
+hi("@operator", { fg = p.operator }) -- 算术/逻辑运算符
+hi("@assignment", { fg = p.punct }) -- = += 等（vitesse 里赋值是灰色）
 hi("@punctuation.delimiter", { fg = p.punct })
 hi("@punctuation.bracket", { fg = p.punct })
 hi("@punctuation.special", { fg = p.punct })
@@ -256,8 +322,8 @@ hi("@markup.strikethrough", { fg = p.fg2, strikethrough = true })
 hi("@markup.link", { fg = p.string })
 hi("@markup.link.url", { fg = p.blue, underline = true })
 hi("@markup.link.label", { fg = p.string })
-hi("@markup.raw", { fg = p.keyword })        -- 行内代码
-hi("@markup.list", { fg = p.orange })        -- 列表标记
+hi("@markup.raw", { fg = p.keyword }) -- 行内代码
+hi("@markup.list", { fg = p.orange }) -- 列表标记
 hi("@markup.list.checked", { fg = p.green })
 hi("@markup.list.unchecked", { fg = p.fg2 })
 hi("@markup.quote", { fg = p.interface })
@@ -341,10 +407,10 @@ hi("@lsp.type.macro", { link = "@function" }) -- 占位，避免被覆盖
 ------------------------------------------------------------------
 -- diff（内置）
 ------------------------------------------------------------------
-hi("DiffAdd", { bg = "#16261c", fg = "NONE" })
-hi("DiffChange", { bg = "#161e2b", fg = "NONE" })
-hi("DiffText", { bg = "#26324a", fg = "NONE" })
-hi("DiffDelete", { bg = "#2a1616", fg = "NONE" })
+hi("DiffAdd", { bg = p.diff_add, fg = "NONE" })
+hi("DiffChange", { bg = p.diff_change, fg = "NONE" })
+hi("DiffText", { bg = p.diff_text, fg = "NONE" })
+hi("DiffDelete", { bg = p.diff_delete, fg = "NONE" })
 link("Added", "DiffAdd")
 link("Removed", "DiffDelete")
 link("Changed", "DiffChange")
@@ -376,14 +442,30 @@ hi("BlinkCmpSource", { fg = p.fg2 })
 
 -- 补全项 kind 颜色
 local kinds = {
-  Variable = p.variable, Function = p.func, Method = p.func,
-  Constructor = p.class, Field = p.property, Class = p.class,
-  Interface = p.interface, Module = p.namespace, Property = p.property,
-  Unit = p.number, Value = p.constant, Enum = p.type,
-  Keyword = p.keyword, Snippet = p.fg2, Color = p.magenta,
-  File = p.blue, Reference = p.fg2, Folder = p.blue,
-  EnumMember = p.constant, Constant = p.constant, Struct = p.type,
-  Event = p.magenta, Operator = p.operator, TypeParameter = p.type,
+  Variable = p.variable,
+  Function = p.func,
+  Method = p.func,
+  Constructor = p.class,
+  Field = p.property,
+  Class = p.class,
+  Interface = p.interface,
+  Module = p.namespace,
+  Property = p.property,
+  Unit = p.number,
+  Value = p.constant,
+  Enum = p.type,
+  Keyword = p.keyword,
+  Snippet = p.fg2,
+  Color = p.magenta,
+  File = p.blue,
+  Reference = p.fg2,
+  Folder = p.blue,
+  EnumMember = p.constant,
+  Constant = p.constant,
+  Struct = p.type,
+  Event = p.magenta,
+  Operator = p.operator,
+  TypeParameter = p.type,
 }
 for name, color in pairs(kinds) do
   hi("BlinkCmpKind" .. name, { fg = color })
@@ -433,7 +515,7 @@ hi("GitSignsCurrentLineBlame", { fg = p.fg3 })
 hi("FlashBackdrop", { fg = p.fg3 })
 hi("FlashMatch", { fg = p.blue, bold = true })
 hi("FlashCurrent", { fg = p.keyword, bold = true })
-hi("FlashLabel", { fg = "#000000", bg = p.orange, bold = true })
+hi("FlashLabel", { fg = p.accent_fg, bg = p.orange, bold = true })
 hi("FlashCursor", { reverse = true })
 hi("FlashPrompt", { fg = p.fg1 })
 hi("FlashPromptIcon", { fg = p.keyword })
