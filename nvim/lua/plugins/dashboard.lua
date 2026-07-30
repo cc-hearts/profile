@@ -75,6 +75,9 @@ return {
     opts = function(_, opts)
       opts.options.indicator = { icon = " ✔" }
 
+      -- 用乘号 × 当关闭按钮，图标都太大
+      opts.options.buffer_close_icon = "\u{d7}"
+
       opts.highlights = {
         separator = {
           fg = "#eb6f92",
