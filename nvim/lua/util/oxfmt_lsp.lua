@@ -35,7 +35,7 @@ end
 ---@param buf integer
 ---@return vim.lsp.Client|nil
 local function start_client(root, buf)
-  local cmd = vp.oxfmt_command()
+  local cmd = vp.oxfmt_command(root)
   if not cmd then
     return nil
   end

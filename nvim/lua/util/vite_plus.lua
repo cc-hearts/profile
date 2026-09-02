@@ -128,7 +128,9 @@ function M.is_vite_plus(path)
   return M.find_root(path) ~= nil
 end
 
-local oxfmt_cmd ---@type string|false|nil
+---Per-root cache of the resolved oxfmt wrapper path (or false).
+---@type table<string, string|false>
+local oxfmt_cmd_cache = {}
 
 ---Resolve the oxfmt executable to drive formatting with.
 ---
@@ -139,17 +141,24 @@ local oxfmt_cmd ---@type string|false|nil
 ---`VP_RESOLVING_CONFIG_METADATA`, which makes oxfmt evaluate `vite.config.ts`).
 ---The raw `oxfmt` binary only reads `.oxfmtrc.json` and would diverge from
 ---`vp fmt` (e.g. quote style). Returns nil when vite-plus is not installed.
+---
+---Candidates: the top-level hoist (`~/.vite-plus/current`, stable across vp
+---versions thanks to the `current` symlink), then the project's own
+---`node_modules` (hoisted or pnpm store) so projects that don't install
+---vite-plus globally still resolve their local wrapper.
+---@param root string? vite-plus project root (defaults to cwd)
 ---@return string|nil
-function M.oxfmt_command()
-  if oxfmt_cmd ~= nil then
-    return oxfmt_cmd or nil
+function M.oxfmt_command(root)
+  root = vim.fs.normalize(root or vim.fn.getcwd())
+  if oxfmt_cmd_cache[root] ~= nil then
+    return oxfmt_cmd_cache[root] or nil
   end
 
   local home = vim.fn.expand("~")
-  -- Candidate wrapper paths. The top-level hoist is stable across vp versions
-  -- (thanks to the `current` symlink); the .pnpm glob is a fallback.
   local candidates = {
     home .. "/.vite-plus/current/node_modules/vite-plus/bin/oxfmt",
+    root .. "/node_modules/vite-plus/bin/oxfmt",
+    root .. "/node_modules/.pnpm/vite-plus@*/node_modules/vite-plus/bin/oxfmt",
   }
   local globs = vim.fn.glob(
     home .. "/.vite-plus/current/node_modules/.pnpm/vite-plus@*/node_modules/vite-plus/bin/oxfmt",
@@ -164,12 +173,12 @@ function M.oxfmt_command()
 
   for _, p in ipairs(candidates) do
     if vim.fn.executable(p) == 1 then
-      oxfmt_cmd = p
-      return oxfmt_cmd
+      oxfmt_cmd_cache[root] = p
+      return p
     end
   end
 
-  oxfmt_cmd = false
+  oxfmt_cmd_cache[root] = false
   return nil
 end
 
